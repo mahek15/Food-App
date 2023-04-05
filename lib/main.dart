@@ -1,60 +1,50 @@
-import 'package:chat_app/helper/helper_function.dart';
-import 'package:chat_app/pages/auth/login_page.dart';
-import 'package:chat_app/pages/home_page.dart';
-import 'package:chat_app/shared/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+import 'LogIn/SignIn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'Screens/home.dart';
+import 'Service/googleSignIn.dart';
 
-void main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  if(kIsWeb){
-    await Firebase.initializeApp(options: FirebaseOptions(
-      apiKey: Constants.apiKey,
-      appId: Constants.appId, 
-      messagingSenderId: Constants.messagingSenderId, 
-      projectId: Constants.projectId
-      ));
-  }
-  else
-  {
-      await Firebase.initializeApp(); 
-  }
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+  runApp(ChangeNotifierProvider(
+      create: (context)=> GoogleSignInProvider(),
+    child: MaterialApp(
+        home: Main(),
+        debugShowCheckedModeBanner: false
+    ),
+  ));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+
+class Main extends StatefulWidget {
+  const Main({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<Main> createState() => _MainState();
 }
 
-class _MyAppState extends State<MyApp> {
-
-  bool _isSignedIn = false;
+class _MainState extends State<Main> {
 
   @override
-  void initState() {
-    super.initState();
-    getUserLoggedInStatus();
-  }
-
-  getUserLoggedInStatus() async{
-    await HelperFunctions.getUserLoggedInStatus().then(
-      (value) {
-        if(value!=null){
-          _isSignedIn =  value;
-      }}
-      );
-  }
-   
-  @override
-  Widget   build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: _isSignedIn ? const HomePage() : const LoginPage(),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator(),);
+          } else if(snapshot.hasError) {
+            return Center(child: Text('Something went Wrong!'),);
+          }else if (snapshot.hasData){
+            return Home();
+          } else {
+            return LogIn();
+          }
+        },
+      )
     );
   }
 }
