@@ -1,3 +1,4 @@
+import 'package:chat_app/Screens/Nutrition.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
   int currentIndex = 0;
   List<String> title = ['Home', 'Favorite', 'Cuisine', 'Nutrition'];
 
-  final pages = [Home1(), Favorite(), Cuisine(), Nutrition()];
+  final pages = [Home1(), Favorite(), Cuisine(), NutritionPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
       drawer: const NavBar(),
       body: IndexedStack(
         index: currentIndex,
-        // children: pages,
+        children: pages,
       ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(5),
@@ -146,7 +147,7 @@ class _NavBarState extends State<NavBar> {
                     backgroundColor: Colors.black45,
                     child: CircleAvatar(
                       backgroundImage: NetworkImage((user.photoURL == null
-                          ? "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fdefault-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392%3Fk%3D20%26m%3D1223671392%26s%3D612x612%26w%3D0%26h%3DlGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0%3D&imgrefurl=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fprofile-avatar&tbnid=vzXbYZ4nxFQ_JM&vet=12ahUKEwiEvbH764_7AhVl-HMBHfBEA2kQMygMegUIARD6AQ..i&docid=t12EXnbCus7-DM&w=612&h=612&q=profile%20image&ved=2ahUKEwiEvbH764_7AhVl-HMBHfBEA2kQMygMegUIARD6AQ "
+                          ? "https://media.istockphoto.com/id/1223671392/vector/default-profile-picture-avatar-photo-placeholder-vector-illustration.jpg?s=612x612&w=0&k=20&c=s0aTdmT5aU6b8ot7VKm11DeID6NctRCpB755rA1BIP0="
                           : user.photoURL!)),
                       radius: 75,
                     ),
