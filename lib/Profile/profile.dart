@@ -56,7 +56,7 @@ class _ProfileState extends State<Profile> {
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
                       backgroundImage: NetworkImage((user.photoURL == null
-                          ? "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.istockphoto.com%2Fvectors%2Fdefault-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392%3Fk%3D20%26m%3D1223671392%26s%3D612x612%26w%3D0%26h%3DlGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0%3D&imgrefurl=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fprofile-avatar&tbnid=vzXbYZ4nxFQ_JM&vet=12ahUKEwiEvbH764_7AhVl-HMBHfBEA2kQMygMegUIARD6AQ..i&docid=t12EXnbCus7-DM&w=612&h=612&q=profile%20image&ved=2ahUKEwiEvbH764_7AhVl-HMBHfBEA2kQMygMegUIARD6AQ "
+                          ? "https://media.istockphoto.com/id/1223671392/vector/default-profile-picture-avatar-photo-placeholder-vector-illustration.jpg?s=612x612&w=0&k=20&c=s0aTdmT5aU6b8ot7VKm11DeID6NctRCpB755rA1BIP0="
                           : user.photoURL!)),
                       radius: 85,
                     ),

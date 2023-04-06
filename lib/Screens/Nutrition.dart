@@ -9,14 +9,14 @@ import 'package:path/path.dart';
 
 import 'BarChart.dart';
 
-class Nutrition extends StatefulWidget {
-  const Nutrition({Key? key}) : super(key: key);
+class NutritionPage extends StatefulWidget {
+  const NutritionPage({Key? key}) : super(key: key);
 
   @override
-  State<Nutrition> createState() => _NutritionState();
+  State<NutritionPage> createState() => _NutritionPageState();
 }
 
-class _NutritionState extends State<Nutrition> {
+class _NutritionPageState extends State<NutritionPage> {
   File? image;
   String? name;
 
